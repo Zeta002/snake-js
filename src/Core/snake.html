@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Snake</title>
+    <link rel="stylesheet" href="../../output.css">
+    <script type="module" src="main.js"></script>
+</head>
+<body class="bg-gray-600 flex flex-row gap-20 h-screen items-center justify-center">
+
+<span id="timer" class="font-bold absolute opacity-40" style="font-size: 20em">0</span>
+
+<div id="infos" class="flex flex-col gap-7">
+    <div id="score" class="flex flex-col bg-rose-200 rounded shadow w-20 h-20 gap-2 scale-125 font-bold text-center">
+        <span id="score-title">Score</span>
+        <span id="score-value" class="font-bold scale-150">0</span>
+    </div>
+    <div id="bonus-left" class="flex flex-col bg-rose-200 rounded shadow w-20 h-20 gap-2 scale-125 font-bold text-center">
+        <span id="bonus-left-title">Left</span>
+        <span id="bonus-left-value" class="font-bold scale-150">0</span>
+    </div>
+    <div id="best-score" class="flex flex-col bg-rose-200 rounded shadow w-20 h-20 gap-2 scale-125 font-bold text-center">
+        <span id="best-score-title">Best</span>
+        <span id="best-score-value" class="font-bold scale-150">0</span>
+    </div>
+</div>
+
+<canvas id="game" height="600" width="900" class="bg-rose-200 rounded shadow" style="background-color: rgb(254 205 211)">
+    Your browser does not support the HTML5 canvas tag. That's a problem since the game is played on a canvas.
+</canvas>
+
+<div id="utils" class="flex flex-col gap-7">
+    <button id="start" class="bg-rose-200 rounded shadow active:bg-green-200 w-20 h-10 scale-125 font-bold">Start</button>
+    <button id="freeze" class="bg-rose-200 rounded shadow active:bg-green-200 w-20 h-10 scale-125 font-bold">Freeze</button>
+    <button id="reset" class="bg-rose-200 rounded shadow active:bg-green-200 w-20 h-10 scale-125 font-bold">Reset</button>
+</div>
+
+</body>
+</html>
