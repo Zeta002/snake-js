@@ -1,32 +1,20 @@
-import { config, ctx } from "../Core/config.js";
+import { configInstance, ctx } from "../Core/config.js";
 
 export class Snake {
   constructor() {
-    this.head = config.snake.head;
-    this.body = config.snake.body;
-    this.facingDirection = config.snake.facingDirection;
-    this.headColor = config.snake.headColor;
-    this.bodyColor = config.snake.bodyColor;
+    this.head = configInstance.snake.head;
+    this.body = configInstance.snake.body;
+    this.facingDirection = configInstance.snake.facingDirection;
+    this.headColor = configInstance.snake.headColor;
+    this.bodyColor = configInstance.snake.bodyColor;
     // Ajouter fonctionnalité couleur de plus en plus clair ou sombre en fonction de la taille du serpent
     // this.bodyColor = () => {
     //
     // }
-    this.init();
-  }
-
-  init() {
-    ctx.fillStyle = this.headColor;
-    ctx.fillRect(
-      config.window.width,
-      config.window.height,
-      config.tile.x,
-      config.tile.y,
-    );
-    ctx.fillRect(this.head.x, this.head.y, config.tile.x, config.tile.y);
   }
 
   move() {
-    ctx.clearRect(this.head.x, this.head.y, config.tile.x, config.tile.y);
+    ctx.clearRect(this.head.x, this.head.y, configInstance.tile.x, configInstance.tile.y);
     switch (this.facingDirection) {
       case "up":
         this.updateCoords(this.facingDirection);
@@ -43,12 +31,12 @@ export class Snake {
       default:
         console.error("Error: facingDirection is not valid");
     }
-    ctx.fillRect(this.head.x, this.head.y, config.tile.x, config.tile.y);
+    ctx.fillRect(this.head.x, this.head.y, configInstance.tile.x, configInstance.tile.y);
   }
 
   updateCoords(direction) {
     const axis = direction === "up" || direction === "down" ? "y" : "x";
     const sign = direction === "up" || direction === "left" ? -1 : 1;
-    this.head[axis] += sign * config.tile[axis];
+    this.head[axis] += sign * configInstance.tile[axis];
   }
 }
