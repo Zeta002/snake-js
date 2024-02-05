@@ -1,4 +1,4 @@
-import { configInstance } from "../Core/config.js";
+import { gameConfig } from "../Core/gameConfig.js";
 import { timerInstance } from "../Core/globalVariables.js";
 
 export function time() {
@@ -10,5 +10,5 @@ export function time() {
     }, time);
   }
 
-  timerLimit(configInstance.timeLimitValue); // 1 hour time limit
+  timerLimit(gameConfig.timeLimitValue); // 1 hour time limit
 }

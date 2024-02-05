@@ -1,55 +1,62 @@
-import { configInstance, fruit, ctx } from "../Core/config.js";
+import { gameConfig, ctx } from "../Core/gameConfig.js";
 
 export class Grid {
   constructor() {
-    this.rows = configInstance.window.width / configInstance.tile.x;
-    this.cols = configInstance.window.height / configInstance.tile.y;
+    this.rows = gameConfig.window.width / gameConfig.tile.x;
+    this.cols = gameConfig.window.height / gameConfig.tile.y;
     this.matrix = Array(this.rows)
-      .fill(undefined)
-      .map(() => Array(this.cols).fill(0));
+        .fill(undefined)
+        .map(() => Array(this.cols).fill(0));
     this.init();
   }
 
   init() {
-    ctx.strokeStyle = configInstance.gridColor;
-    ctx.clearRect(0, 0, configInstance.window.width, configInstance.window.height);
+    ctx.strokeStyle = gameConfig.gridColor;
+    ctx.clearRect(0, 0, gameConfig.window.width, gameConfig.window.height);
 
-    this.initSnake();
-    this.initFruit();
+    // this.initSnake();
+    // this.initFruit();
 
-    for (let i = 0; i <= configInstance.window.width; i += configInstance.tile.x) {
+    for (let i = 0; i <= gameConfig.window.width; i += gameConfig.tile.x) {
       ctx.beginPath();
       ctx.moveTo(i, 0);
-      ctx.lineTo(i, configInstance.window.height);
+      ctx.lineTo(i, gameConfig.window.height);
       ctx.stroke();
     }
-    for (let i = 0; i <= configInstance.window.height; i += configInstance.tile.y) {
+    for (let i = 0; i <= gameConfig.window.height; i += gameConfig.tile.y) {
       ctx.beginPath();
       ctx.moveTo(0, i);
-      ctx.lineTo(configInstance.window.width, i);
+      ctx.lineTo(gameConfig.window.width, i);
       ctx.stroke();
     }
   }
 
   addToMatrix(object) {
-    this.matrix[object.x][object.y] = object;
-  }
-
-  initSnake() {
-    ctx.fillStyle = configInstance.snake.headColor;
-    ctx.fillRect(
-      configInstance.snake.head.x,
-      configInstance.snake.head.y,
-      configInstance.tile.x,
-      configInstance.tile.y,
-    );
-  }
-
-  initFruit() {
-    ctx.fillStyle = fruit.color;
-    ctx.fillRect(fruit.coords.x, fruit.coords.y, configInstance.tile.x, configInstance.tile.y);
-    if(fruit.coords.x === configInstance.snake.head.x && fruit.coords.y === configInstance.snake.head.y) {
-      this.initFruit();
+    if(object === null) console.error("Error: object is null");
+    else if(object.x === undefined || object.y === undefined) return;
+    else if(object.x < this.rows && object.y < this.cols) {
+      this.matrix[object.x][object.y] = object;
+    } else {
+      console.error(`Error: object coordinates (${object.x}, ${object.y}) are out of grid bounds`);
     }
+    if(object === undefined) console.error("Error: object is undefined");
   }
+
+  // initSnake() {
+  //   ctx.fillStyle = configInstance.snake.headColor;
+  //   ctx.fillRect(
+  //     configInstance.snake.head.x,
+  //     configInstance.snake.head.y,
+  //     configInstance.tile.x,
+  //     configInstance.tile.y,
+  //   );
+  // }
+
+  // initFruit() {
+  //   ctx.fillStyle = fruit.color;
+  //   ctx.fillRect(fruit.coords.x, fruit.coords.y, configInstance.tile.x, configInstance.tile.y);
+  //   if(fruit.coords.x === configInstance.snake.head.x && fruit.coords.y === configInstance.snake.head.y) {
+  //     this.initFruit();
+  //   }
+  // }
 }
